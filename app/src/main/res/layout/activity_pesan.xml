@@ -10,11 +10,45 @@
     tools:context=".PesanActivity" >
 
     <TextView
-        android:id="@+id/out1"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Nama driver" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="20dp"
+        android:text="Telepon" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="20dp"
+        android:text="Status" />
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_marginTop="200dp"
+        android:layout_below="@+id/textView3"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="Kirim order" />
+    <TextView
+        android:id="@+id/out1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_toRightOf="@id/textView1"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:text="" />
     <TextView
         android:id="@+id/out2"
         android:layout_width="wrap_content"
@@ -22,7 +56,7 @@
         android:layout_alignLeft="@+id/out1"
         android:layout_below="@+id/out1"
         android:layout_marginTop="20dp"
-        android:text="Telepon" />
+        android:text="" />
     <TextView
         android:id="@+id/out3"
         android:layout_width="wrap_content"
@@ -30,14 +64,7 @@
         android:layout_alignLeft="@+id/out1"
         android:layout_below="@+id/out2"
         android:layout_marginTop="20dp"
-        android:text="Status" />
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/out1"
-        android:layout_marginTop="200dp"
-        android:layout_below="@+id/out3"
-        style="?android:attr/borderlessButtonStyle"
-        android:text="Kirim order" />
+        android:text="" />
+
+
 </RelativeLayout>

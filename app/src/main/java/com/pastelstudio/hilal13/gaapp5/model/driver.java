@@ -4,11 +4,13 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by niel on 03/02/2018.
  */
 @IgnoreExtraProperties
-public class driver {
+public class driver implements Serializable{
 
     @SerializedName("latitude")
     @Expose

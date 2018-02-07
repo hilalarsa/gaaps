@@ -87,31 +87,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (int i = 1; i < 3; i++) {
 
             final String uid = "driver0" + i;
+            final int finalI = i;
             mDatabase.child(uid)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (int i = 1; i < 3; i++) {
+                            //for (int i = 1; i < 3; i++) {
 
-                                driver drv1 = dataSnapshot.getValue(driver.class);
+                                final driver drv1 = dataSnapshot.getValue(driver.class);
                                 getLatitude = drv1.getLatitude();
                                 getLongitude = drv1.getLongitude();
                                 getNama = drv1.getNama();
                                 getStatus = drv1.getStatus();
+                                getTelepon = drv1.getTelepon();
 //                                Toast.makeText(MapsActivity.this, "Data : " + dataSnapshot,
 //                                        Toast.LENGTH_LONG).show();
-                                Toast.makeText(MapsActivity.this, "Driver : "+getNama+", Current Pos : " + getLatitude + " | " + getLongitude,
-                                        Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(MapsActivity.this, "Driver : "+getNama+", Current Pos : " + getLatitude + " | " + getLongitude,
+//                                        Toast.LENGTH_SHORT).show();
 
                                 LatLng newPos = new LatLng(getLatitude, getLongitude);
                                 Log.d("TAG", "Lat : " + getLatitude + " and Long : " + getLongitude);
 
                                 mMap.addMarker(new MarkerOptions()
                                         .position(newPos)
-                                        .title(getNama + " Status : " +getStatus)
-                                        .draggable(false));
-                                Toast.makeText(MapsActivity.this, "Position updated!",
-                                        Toast.LENGTH_SHORT).show();
+                                        .title(getNama)
+                                        .draggable(false)
+                                        .snippet("driver0"+ finalI));
+//                                Toast.makeText(MapsActivity.this, "Position updated!",
+//                                        Toast.LENGTH_SHORT).show();
 
                                 //------------------
                                         // Getting view from the layout file info_window_layout
@@ -120,15 +123,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                                             public void onInfoWindowClick(Marker arg0)
                                             {
-                                                Intent intent = new Intent(getApplicationContext() ,PesanActivity.class);
-                                                intent.putExtra("getNama",getNama);
-                                                intent.putExtra("getStatus",getStatus);
-                                                intent.putExtra("getTelepon", getTelepon);
+                                                Intent intent = new Intent(getApplicationContext(), PesanActivity.class);
+//                                                intent.putExtra("fullData", drv1);
+                                                intent.putExtra("uid",arg0.getSnippet());
+                                                Toast.makeText(MapsActivity.this, "Clicked"+arg0.getTitle(), Toast.LENGTH_LONG).show();
                                                 startActivity(intent);
                                             }
                                         });
 
-                            }
+                            //} //hapus sementara
 
                         }
                         @Override
@@ -175,8 +178,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        longitude=pos.longitude;
         LatLng newPos = new LatLng(getLatitude,getLongitude);
         //mMap.clear();
-        Toast.makeText(MapsActivity.this, "Refreshed marker pos : " + getLatitude +" | "+ getLongitude,
-                Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MapsActivity.this, "Refreshed marker pos : " + getLatitude +" | "+ getLongitude,
+//                Toast.LENGTH_SHORT).show();
         mMap.addMarker(new MarkerOptions()
                 .position(newPos)
                 .title("Marker in Searched position")
