@@ -226,12 +226,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void getDataDriver()
-    {
-
-    }
-
-
     @Override
     protected void onResume() {
         //start handler as activity become visible
