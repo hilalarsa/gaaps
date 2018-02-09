@@ -1,10 +1,17 @@
 package com.pastelstudio.hilal13.gaapp5;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,6 +25,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -29,13 +38,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pastelstudio.hilal13.gaapp5.model.driver;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     Handler h = new Handler();
     int delay = 7*1000; //1 second=1000 milisecond, 15*1000=15seconds
     Runnable runnable;
-
+    private TextView mTextMessage;
 
     private static final LatLng SYDNEY = new LatLng(-33.87365, 151.20689);
 
@@ -43,6 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public Double getLatitude,getLongitude;
     public String getNama,getStatus,getTelepon;
+    public int markerStatus;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     final DatabaseReference myRef = database.getReference();
     DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference().child("driver");
@@ -56,7 +66,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         //getData(); // ambil data dari firebase
-
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//------------------------------
         placeAutoComplete = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete);
         placeAutoComplete.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -82,9 +94,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-    public void tesAH()
+    public void getNewLocation()
     {
-        for (int i = 1; i < 3; i++) {
+        for (int i = 1; i < 4; i++) {
 
             final String uid = "driver0" + i;
             final int finalI = i;
@@ -107,26 +119,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 LatLng newPos = new LatLng(getLatitude, getLongitude);
                                 Log.d("TAG", "Lat : " + getLatitude + " and Long : " + getLongitude);
+//                              cek status
 
-                                mMap.addMarker(new MarkerOptions()
-                                        .position(newPos)
-                                        .title(getNama)
-                                        .draggable(false)
-                                        .snippet("driver0"+ finalI));
-//                                Toast.makeText(MapsActivity.this, "Position updated!",
-//                                        Toast.LENGTH_SHORT).show();
+                                if(getStatus.equals("idle")) {
+                                    markerStatus=R.mipmap.marker_ga;
+                                }else if(getStatus.equals("working")){
+                                    markerStatus=R.mipmap.marker_ga_disabled;
+                                }
 
-                                //------------------
-                                        // Getting view from the layout file info_window_layout
-
-
+                            Marker marker1=mMap.addMarker(new MarkerOptions()
+                                    .icon(BitmapDescriptorFactory.fromResource(markerStatus))
+                                    .position(newPos)
+                                    .title(getNama)
+                                    .draggable(false)
+                                    .snippet("Status : "+getStatus));
+                            marker1.setTag(uid);
                                         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                                             public void onInfoWindowClick(Marker arg0)
                                             {
                                                 Intent intent = new Intent(getApplicationContext(), PesanActivity.class);
 //                                                intent.putExtra("fullData", drv1);
-                                                intent.putExtra("uid",arg0.getSnippet());
-                                                Toast.makeText(MapsActivity.this, "Clicked"+arg0.getTitle(), Toast.LENGTH_LONG).show();
+                                                intent.putExtra("uid",arg0.getTag().toString());
                                                 startActivity(intent);
                                             }
                                         });
@@ -178,9 +191,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        longitude=pos.longitude;
         LatLng newPos = new LatLng(getLatitude,getLongitude);
         //mMap.clear();
-//        Toast.makeText(MapsActivity.this, "Refreshed marker pos : " + getLatitude +" | "+ getLongitude,
-//                Toast.LENGTH_SHORT).show();
         mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker_ga))
                 .position(newPos)
                 .title("Marker in Searched position")
                 .draggable(true));;
@@ -232,7 +244,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         h.postDelayed(new Runnable() {
             public void run() {
-                tesAH();
+                getNewLocation();
                 mMap.clear();
 
                 runnable=this;
@@ -249,5 +261,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         h.removeCallbacks(runnable); //stop handler when activity not visible
         super.onPause();
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+//                    mTextMessage.setText(R.string.title_home);
+                    Toast.makeText(MapsActivity.this, "Data refreshed",
+                            Toast.LENGTH_SHORT).show();
+                    getNewLocation();
+                    return true;
+
+                case R.id.navigation_dashboard:
+                    Toast.makeText(MapsActivity.this, "Dashboard",
+                            Toast.LENGTH_SHORT).show();
+//                    mTextMessage.setText(R.string.title_dashboard);
+                    return true;
+
+                case R.id.navigation_notifications:
+                    Toast.makeText(MapsActivity.this, "Notifications",
+                            Toast.LENGTH_SHORT).show();
+//                    mTextMessage.setText(R.string.title_notifications);
+                    return true;
+            }
+            return false;
+        }
+
+    };
 }

@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">SAI GA MONITOR</string>
-    <string name="title_activity_maps">Driver Monitoring</string>
+    <string name="title_activity_maps"></string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">List driver</string>
+    <string name="title_notifications">History</string>
 
 </resources>

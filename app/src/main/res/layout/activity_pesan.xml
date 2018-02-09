@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:paddingTop="16dp"
     tools:context=".PesanActivity" >
+
+
 
     <ImageView
         android:id="@+id/imageView1"
@@ -18,150 +17,161 @@
         android:layout_centerHorizontal="true"
         android:src="@mipmap/yazaki_logo" />
 
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        card_view:cardCornerRadius="2dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:tooltipText="Info Driver">
+
     <TextView
+        android:paddingLeft="24dp"
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imageView1"
         android:layout_marginTop="30dp"
         android:text="Nama driver"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textIsSelectable="false"
         android:textSize="18sp"
         android:textStyle="bold" />
-
     <TextView
+        android:paddingLeft="24dp"
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="70dp"
         android:text="Telepon"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
         android:textStyle="bold" />
+        <TextView
+            android:paddingLeft="24dp"
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="110dp"
+            android:text="Status"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="20dp"
-        android:text="Status"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="20dp"
-        android:text="Pekerjaan     "
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <TextView
+            android:paddingLeft="24dp"
+            android:id="@+id/out1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView1"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@id/textView1"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp" />
+        <TextView
+            android:paddingLeft="24dp"
+            android:id="@+id/out2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/out1"
+            android:layout_below="@+id/out1"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="120dp"
+            android:text="09898989898989"
+            android:textSize="18sp"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
+
+        <TextView
+
+            android:paddingLeft="24dp"
+            android:id="@+id/out3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/out1"
+            android:layout_marginLeft="120dp"
+            android:layout_below="@+id/out2"
+            android:layout_marginTop="110dp"
+            android:text="jomblo"
+            android:textSize="18sp"
+            android:textAppearance="@style/TextAppearance.AppCompat" />
+
+
+    </android.support.v7.widget.CardView>
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/telepon"
+        android:layout_below="@+id/editText2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:tooltipText="Contact Driver"/>
+
     <EditText
         android:id="@+id/editText1"
-        android:inputType="textMultiLine"
-        android:lines="5"
-        android:minLines="4"
+
         android:gravity="top|left"
         android:maxLines="10"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:scrollbars="vertical"
-        android:layout_below="@+id/out3"
+        android:layout_below="@+id/card_view"
         android:layout_marginTop="10dp"
-        android:hint="Masukkan detail pekerjaan untuk Driver"
-        android:layout_toRightOf="@+id/textView1"
-        android:layout_toEndOf="@+id/textView1" />
+        android:hint="Masukkan detail pekerjaan"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_alignParentLeft="true"/>
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/editText2"
+        android:gravity="top|left"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
-        android:background="@color/colorAccent"
-        android:text="Kirim order"
-        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
         android:layout_below="@+id/editText1"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/out1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_toRightOf="@id/textView1"
-        android:layout_below="@id/imageView1"
-        android:text="Nmaku Nopitasari"
-        android:textSize="18sp"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
-
-    <TextView
-        android:id="@+id/out2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/out1"
-        android:layout_below="@+id/out1"
-        android:layout_marginTop="20dp"
-        android:text="09898989898989"
-        android:textSize="18sp"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
-
-
-    <TextView
-        android:id="@+id/out3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/out1"
-        android:layout_below="@+id/out2"
-        android:layout_marginTop="20dp"
-        android:text="jomblo"
-        android:textSize="18sp"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
-
-    <TextView
         android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtAtau"
-        android:text="Atau hubungi melalui "
-        android:layout_below="@id/button1"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        />
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:hint="Lokasi"
+        android:layout_alignParentLeft="true" />
+
+
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtAtau"
-        android:layout_centerHorizontal="true"
-        >
-        <ImageButton
-            android:id="@+id/imageButton1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/whatsapp_logo"
-            android:background="@android:color/transparent"
-            />
-        <ImageButton
-            android:id="@+id/imageButton2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/telepon"
-            android:background="@android:color/transparent"
-            />
-    </LinearLayout>
+        android:gravity="center|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/linearLayout">
 
+        <Button
+            android:id="@+id/button1"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText2"
+            android:background="@color/colorAccent"
+            android:text="Kirim order"
+            android:layout_gravity="center|bottom"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
 
 
 
