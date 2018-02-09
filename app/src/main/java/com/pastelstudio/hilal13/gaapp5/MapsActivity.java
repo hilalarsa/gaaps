@@ -275,8 +275,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     return true;
 
                 case R.id.navigation_dashboard:
-                    Toast.makeText(MapsActivity.this, "Dashboard",
+                    Toast.makeText(MapsActivity.this, "List driver",
                             Toast.LENGTH_SHORT).show();
+                    Intent listdriver = new Intent(getApplicationContext(),ListDriver.class);
+                    startActivity(listdriver);
 //                    mTextMessage.setText(R.string.title_dashboard);
                     return true;
 
